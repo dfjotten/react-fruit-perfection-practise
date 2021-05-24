@@ -9,6 +9,10 @@ import { ReactComponent as ShoppingCart } from './assets/winkelmandje.svg';
 
 
 function App() {
+
+    const [messageValue, setMessageValue] = React.useState('');
+    const [checkedTerms, toggleCheckedTerms] = React.useState(false)
+
   return (
       <>
           <nav>
@@ -21,12 +25,8 @@ function App() {
           </nav>
 
           <header>
-            <h1>
-                Fruit Perfection
-            </h1>
-              <button type="button" onClick={() => console.log("Customer wants to shop")}>
-                  Shop nu
-              </button>
+            <h1>Fruit Perfection</h1>
+              <button type="button" onClick={() => console.log("Customer wants to shop")}>Shop nu</button>
           </header>
 
       <main>
@@ -63,6 +63,32 @@ function App() {
           {/*    <p className={"product-description"}>Een ijsblokje of ijsklontje is bevroren water in de vorm van een klein blokje. Het wordt gemaakt in een diepvriezer door water in een plastic vorm te laten bevriezen.</p>*/}
           {/*</article>*/}
       </main>
+
+          <footer>
+              <div className="form-container">
+                  <h2>Contactformulier</h2>
+
+                  <form>
+                      <input
+                          type="text"
+                          placeholder="Typ hier jouw bericht"
+                          name="message"
+                          onChange={(e) => setMessageValue(e.target.value)}
+                          value={messageValue}
+                          className={messageValue.length > 20 ? 'input-error' : ''}
+                      />
+
+                      <label htmlFor="terms-and-conditions" >
+                          <input type="checkbox" name="terms-and-conditions" id="terms-and-conditions" checked={checkedTerms} onChange={() => toggleCheckedTerms(!checkedTerms)}/>
+                          Ik ga akkoord met de algemene voorwaarden
+                      </label>
+
+                      <button type="submit" disabled= {checkedTerms === false}>
+                          Verstuur
+                      </button>
+                  </form>
+              </div>
+          </footer>
       </>
 
   );
